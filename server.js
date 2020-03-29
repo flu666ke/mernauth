@@ -19,17 +19,19 @@ mongoose.connect(process.env.DATABASE, {
 
 // import routes
 const authRoutes = require('./routes/auth')
+const userRoutes = require('./routes/user')
 
 // app middleware
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 // app.use(cors()) // allow all origins
-if (process.env.NODE_ENV = 'development') {
+if (process.env.NODE_ENV === 'development') {
     app.use(cors({ origin: `http://localhost:3000` }))
 }
 
 // middleware
 app.use('/api', authRoutes)
+app.use('/api', userRoutes)
 
 
 const port = process.env.PORT || 8000
